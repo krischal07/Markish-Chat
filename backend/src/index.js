@@ -27,7 +27,58 @@ app.use("/api/message", messageRoutes);
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-  app.get("*", (req, res) => {
+  app.get("*", (req, res) => {app.use(express.json());
+  app.use(cookieParser());
+  app.use(cors({
+    origin: process.env.NODE_ENV === "development" ? "http://localhost:5173" : "*",
+    credentials: true
+  }));
+  
+  // Base API routes
+  app.use("/api/auth", authRoutes);
+  app.use("/api/message", messageRoutes);
+  
+  // Serve static assets in production
+  if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "../frontend/dist")));
+    app.get("/*", (req, res) => {
+      res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+    });
+  }app.use(express.json());
+  app.use(cookieParser());
+  app.use(cors({
+    origin: process.env.NODE_ENV === "development" ? "http://localhost:5173" : "*",
+    credentials: true
+  }));
+  
+  // Base API routes
+  app.use("/api/auth", authRoutes);
+  app.use("/api/message", messageRoutes);
+  
+  // Serve static assets in production
+  if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "../frontend/dist")));
+    app.get("/*", (req, res) => {
+      res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+    });
+  }app.use(express.json());
+  app.use(cookieParser());
+  app.use(cors({
+    origin: process.env.NODE_ENV === "development" ? "http://localhost:5173" : "*",
+    credentials: true
+  }));
+  
+  // Base API routes
+  app.use("/api/auth", authRoutes);
+  app.use("/api/message", messageRoutes);
+  
+  // Serve static assets in production
+  if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "../frontend/dist")));
+    app.get("/*", (req, res) => {
+      res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+    });
+  }
     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
   });
 }
