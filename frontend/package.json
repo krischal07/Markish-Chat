@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "vite": "^5.4.19",
+    "@vitejs/plugin-react": "^4.3.3",
     "axios": "^1.7.7",
     "chat-app": "file:..",
     "lucide-react": "^0.459.0",
@@ -25,7 +26,6 @@
     "@eslint/js": "^9.13.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "@vitejs/plugin-react": "^4.3.3",
     "autoprefixer": "^10.4.20",
     "daisyui": "^4.12.14",
     "eslint": "^9.13.0",
