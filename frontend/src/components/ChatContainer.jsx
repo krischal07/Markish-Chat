@@ -18,12 +18,15 @@ const ChatContainer = () => {
     unsubscribeFromMessages,
   } = useChatStore();
 
+  // Ensure messages is always an array
+  const safeMessages = Array.isArray(messages) ? messages : [];
+
   console.log(messages, "messagess");
   const { authUser } = useAuthStore();
   const messageEndRef = useRef(null);
 
   useEffect(() => {
-    if (messageEndRef.current && messages) {
+    if (messageEndRef.current && Array.isArray(messages)) {
       messageEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages]);
@@ -40,11 +43,17 @@ const ChatContainer = () => {
     unsubscribeFromMessages,
   ]);
 
-  if (isMessagesLoading) {
+  if (!selectedUser || isMessagesLoading) {
     return (
       <div className="flex-1 flex flex-col overflow-auto">
         <ChatHeader />
-        <MessageSkeleton />
+        {isMessagesLoading ? (
+          <MessageSkeleton />
+        ) : (
+          <div className="flex-1 flex items-center justify-center">
+            <p className="text-gray-500">Select a user to start chatting</p>
+          </div>
+        )}
         <MessageInput />
       </div>
     );
@@ -54,7 +63,7 @@ const ChatContainer = () => {
     <div className="flex-1 flex flex-col overflow-auto">
       <ChatHeader />
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
-        {(messages || []).map((message) => {
+        {safeMessages.map((message) => {
           return (
             <div
               key={message.id}
