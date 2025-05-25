@@ -4,11 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "npx vite",
-    "build": "npx vite build",
-    "lint": "eslint .",
-    "preview": "npx vite preview"
-  },
+  "dev": "npx vite",
+  "build": "npx vite build",
+  "lint": "eslint .",
+  "preview": "npx vite preview",
+  "start": "npx vite preview"
+},
   "dependencies": {
     "vite": "^5.4.19",
     "@vitejs/plugin-react": "^4.3.3",
